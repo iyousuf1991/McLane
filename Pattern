@@ -3,3 +3,9 @@ IBM i production workloads run on the primary CoLo (PRODDSS) partition while the
 
 DASD Replication — Active/Passive Asynchronous
 z/OS workloads (JES2, CICS, DB2, MQ) run exclusively on the primary Temple Data Center LPARs (JESB, JESA, JESC) while the CoLo facility remains passive. Dell PowerMax (3328/3329) storage arrays replicate data asynchronously to CoLo via SRDF/RDF — writes are acknowledged on the primary before being mirrored to DR volumes. If the primary site fails, CoLo LPARs are IPL'd, DB2 recovery jobs (DRGRECT/DRGRECP) are executed, MQ queue managers (MQPA/MQTA) are brought online, CICS regions are started sequentially, and BMC Control-M batch workloads are redirected to CoLo resources.
+
+Mimix Journal Replication — Active/Passive Asynchronous
+IBM i production workloads run on the primary CoLo (PRODDSS) while Temple remains passive. Mimix replicates data asynchronously via journal-based datagroups. On failover, datagroups are ended, the floating IP (10.7.1.169) is switched, RDB directory entries updated, and Mimix restarted on Temple with the Turnover IFS key manually applied.
+
+DASD Replication — Active/Passive Asynchronous
+z/OS workloads (JES2, CICS, DB2, MQ) run on the primary Temple Data Center (JESB/JESA/JESC) while CoLo remains passive. Dell PowerMax replicates storage asynchronously to CoLo via SRDF/RDF. On failover, CoLo LPARs are IPL'd, DB2 recovery jobs executed, MQ queue managers and CICS regions started, and Control-M batch workloads redirected to CoLo.
