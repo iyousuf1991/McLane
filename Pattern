@@ -9,3 +9,9 @@ IBM i production workloads run on the primary CoLo (PRODDSS) while Temple remain
 
 DASD Replication — Active/Passive Asynchronous
 z/OS workloads (JES2, CICS, DB2, MQ) run on the primary Temple Data Center (JESB/JESA/JESC) while CoLo remains passive. Dell PowerMax replicates storage asynchronously to CoLo via SRDF/RDF. On failover, CoLo LPARs are IPL'd, DB2 recovery jobs executed, MQ queue managers and CICS regions started, and Control-M batch workloads redirected to CoLo.
+
+OSA-Express with Manual VLAN Reroute — Active/Passive Asynchronous
+z/OS network connectivity runs through OSA-Express adapters on the primary Temple Data Center LPARs (JESB/JESA/JESC) while CoLo remains passive. On failover, network teams manually reroute VLANs to the CoLo OSA-Express ports, restoring mainframe network connectivity without requiring hardware changes.
+
+IOA with Manual VLAN Reroute — Active/Passive Asynchronous
+IBM i network connectivity at the primary CoLo (PRODDSS) runs through IOA (Input/Output Adapter) ports. The Temple site remains passive. On failover, network teams manually reroute VLANs to the Temple IOA ports, redirecting IBM i application traffic to the DR partition.
